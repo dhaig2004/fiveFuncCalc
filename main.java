@@ -16,7 +16,7 @@ class Main{
         // Create buttons
         ArrayList<JButton> buttons = new ArrayList<>();
         ArrayList<String> buttonText = new ArrayList<>();
-        buttonText.addAll(Arrays.asList("CLEAR","+","-","1","2","3","*","4","5","6","/","7","8","9","^","0","="));
+        buttonText.addAll(Arrays.asList("CLEAR","+","-","1","2","3","*","4","5","6","/","7","8","9","^","0",".","="));
         for (int i=0; i<buttonText.size(); i++){
             buttons.add(new JButton(buttonText.get(i)));
             frame.add(buttons.get(i));
@@ -39,6 +39,7 @@ class Main{
         buttons.get(13).setBounds(200,416,100,92);
         buttons.get(14).setBounds(300,416,100,92);
         buttons.get(15).setBounds(0,508,100,92);
-        buttons.get(16).setBounds(100,508,300,92);
+        buttons.get(16).setBounds(100,508,100,92);
+        buttons.get(17).setBounds(200,508,200,92);
     }
 }
