@@ -15,7 +15,7 @@ class Main{
         frame.setSize(414, 637);
         frame.setLayout(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setTitle("Simple Calculator");
+        frame.setTitle("Five-Function Calculator");
         // Create buttons
         ArrayList<JButton> buttons = new ArrayList<>();
         ArrayList<String> buttonText = new ArrayList<>();
