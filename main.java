@@ -1,18 +1,21 @@
 import java.awt.Color;
-import java.io.*;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import javax.swing.*;
 
+
 class Main{
     public static void main(String[] args) {
         // Create frame
         JFrame frame = new JFrame();
-        frame.setSize(413, 638);
+        frame.setSize(414, 637);
         frame.setLayout(null);
-        frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setTitle("Simple Calculator");
         // Create buttons
         ArrayList<JButton> buttons = new ArrayList<>();
         ArrayList<String> buttonText = new ArrayList<>();
@@ -22,7 +25,26 @@ class Main{
             frame.add(buttons.get(i));
             buttons.get(i).setFocusable(false);
             buttons.get(i).setBorder(BorderFactory.createLineBorder(Color.BLACK,2));
+            buttons.get(i).setFont(new Font("Arial",Font.BOLD,20));
+            //Color buttons
+            Color clear = new Color(242,75,75);
+            Color funcs = new Color(255,0,230);
+            Color equ = new Color(29,225,55);
+            Color nums = new Color(0,179,255);
+            if (i==0){
+                buttons.get(i).setBackground(clear);
+            }
+            else if (Arrays.asList(1,2,6,10,14).contains(i)){
+                buttons.get(i).setBackground(funcs);
+            }
+            else if (i==17){
+                buttons.get(i).setBackground(equ);
+            }
+            else{
+                buttons.get(i).setBackground(nums);
+            }
         }
+        //Set positions of buttons
         buttons.get(0).setBounds(0,140,200,92);
         buttons.get(1).setBounds(200,140,100,92);
         buttons.get(2).setBounds(300,140,100,92);
@@ -41,5 +63,41 @@ class Main{
         buttons.get(15).setBounds(0,508,100,92);
         buttons.get(16).setBounds(100,508,100,92);
         buttons.get(17).setBounds(200,508,200,92);
+
+        //Header
+        JLabel title = new JLabel("CALCULATOR",SwingConstants.CENTER);
+        title.setBounds(0,0,400,40);
+        title.setFont(new Font("Arial",Font.BOLD | Font.ITALIC,25));
+        title.setBackground(new Color(194,252,252));
+        title.setOpaque(true);
+        frame.add(title);
+
+        //Text field
+        JTextField text = new JTextField("",20);
+        text.setBounds(0,40,400,100);
+        text.setEditable(false);
+        text.setBackground(Color.WHITE);
+        text.setHorizontalAlignment(JTextField.RIGHT);
+        text.setFont(new Font("Arial",Font.PLAIN,18));
+        frame.add(text);
+
+        frame.setVisible(true);
+
+        
+
+        // CLEAR
+        buttons.get(0).addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                text.setText("");
+
+            }
+        });
+        // 1
+        buttons.get(3).addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                text.setText(text.getText()+"1");
+
+            }
+        });
     }
 }
