@@ -99,5 +99,119 @@ class Main{
 
             }
         });
+        // 2
+        buttons.get(4).addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                text.setText(text.getText()+"2");
+
+            }
+        });
+        // 3
+        buttons.get(5).addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                text.setText(text.getText()+"3");
+
+            }
+        });
+        // 4
+        buttons.get(7).addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                text.setText(text.getText()+"4");
+
+            }
+        });
+        // 5
+        buttons.get(8).addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                text.setText(text.getText()+"5");
+
+            }
+        });
+        // 6
+        buttons.get(9).addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                text.setText(text.getText()+"6");
+
+            }
+        });
+        // 7
+        buttons.get(11).addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                text.setText(text.getText()+"7");
+
+            }
+        });
+        // 8
+        buttons.get(12).addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                text.setText(text.getText()+"8");
+
+            }
+        });
+        // 9
+        buttons.get(13).addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                text.setText(text.getText()+"9");
+
+            }
+        });
+        // 0
+        buttons.get(15).addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                text.setText(text.getText()+"0");
+
+            }
+        });
+        // Decimal
+        buttons.get(16).addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int opLoc = -1;
+                for (int i=0; i<text.getText().length(); i++) {
+                    if (Arrays.asList('+','-','*','/','^').contains(text.getText().charAt(i))){
+                        opLoc = i;
+                    }
+                }
+                // Doesn't let user put multiple decimal points in the same number
+                if (opLoc==-1){
+                    if (text.getText().contains(".") == false){
+                        text.setText(text.getText()+".");
+                    }
+                }
+                else{
+                    if (text.getText().substring(opLoc).contains(".") == false){
+                        text.setText(text.getText()+".");
+                    }
+                }
+
+            }
+        });
+        // +
+        buttons.get(1).addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (text.getText().contains("+") || text.getText().contains("-") || text.getText().contains("*") || text.getText().contains("/") || text.getText().contains("^")){
+                    if (Arrays.asList('+','-','*','/','^').contains(text.getText().charAt(text.getText().length()-1))){
+                        text.setText(text.getText().substring(0,text.getText().length()-1)+"+");
+                    }
+                }
+                else if (text.getText().isEmpty() == false && text.getText().equals(".") == false){
+                    text.setText(text.getText()+"+");
+                }
+
+            }
+        });
+        // -
+        buttons.get(2).addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (text.getText().contains("+") || text.getText().contains("-") || text.getText().contains("*") || text.getText().contains("/") || text.getText().contains("^")){
+                    if (Arrays.asList('+','-','*','/','^').contains(text.getText().charAt(text.getText().length()-1))){
+                        text.setText(text.getText().substring(0,text.getText().length()-1)+"-");
+                    }
+                }
+                else if (text.getText().isEmpty() == false && text.getText().equals(".") == false){
+                    text.setText(text.getText()+"-");
+                }
+
+            }
+        });
     }
 }
