@@ -9,6 +9,9 @@ import javax.swing.*;
 
 
 class Main{
+    final public String eval(String s){
+        return "hi";
+    }
     public static void main(String[] args) {
         // Create frame
         JFrame frame = new JFrame();
@@ -166,20 +169,21 @@ class Main{
         buttons.get(16).addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 int opLoc = -1;
-                for (int i=0; i<text.getText().length(); i++) {
-                    if (Arrays.asList('+','-','*','/','^').contains(text.getText().charAt(i))){
+                String str = text.getText();
+                for (int i=0; i<str.length(); i++) {
+                    if (Arrays.asList('+','-','*','/','^').contains(str.charAt(i))){
                         opLoc = i;
                     }
                 }
                 // Doesn't let user put multiple decimal points in the same number
                 if (opLoc==-1){
-                    if (text.getText().contains(".") == false){
-                        text.setText(text.getText()+".");
+                    if (str.contains(".") == false){
+                        text.setText(str+".");
                     }
                 }
                 else{
-                    if (text.getText().substring(opLoc).contains(".") == false){
-                        text.setText(text.getText()+".");
+                    if (str.substring(opLoc).contains(".") == false){
+                        text.setText(str+".");
                     }
                 }
 
@@ -188,13 +192,47 @@ class Main{
         // +
         buttons.get(1).addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if (text.getText().contains("+") || text.getText().contains("-") || text.getText().contains("*") || text.getText().contains("/") || text.getText().contains("^")){
-                    if (Arrays.asList('+','-','*','/','^').contains(text.getText().charAt(text.getText().length()-1))){
-                        text.setText(text.getText().substring(0,text.getText().length()-1)+"+");
+                String str = text.getText();
+                if (str.contains("+") || str.substring(1,str.length()).contains("-") || str.contains("*") || str.contains("/") || str.contains("^")){
+                    // Replace operation at end of string
+                    if (Arrays.asList('+','-','*','/','^').contains(str.charAt(str.length()-1))){
+                        text.setText(str.substring(0,str.length()-1)+"+");
+                    }
+                    else{
+                        int opLoc = -1;
+                        for (int i=0; i<str.length(); i++) {
+                            if (Arrays.asList('+','-','*','/','^').contains(str.charAt(i))){
+                                opLoc = i;
+                            }
+                        }
+                        String first = str.substring(0,opLoc);
+                        String second = str.substring(opLoc+1,str.length());
+                        char op = str.charAt(opLoc);
+                        if (second.equals(".")){
+                            
+                        }
+                        // Calculate operation and add plus sign to end of answer
+                        else if (op=='+'){
+                            text.setText(Float.toString(Float.parseFloat(first)+Float.parseFloat(second))+"+");
+                        }
+                        else if (op=='-'){
+                            text.setText(Float.toString(Float.parseFloat(first)-Float.parseFloat(second))+"+");
+                        }
+                        else if (op=='*'){
+                            text.setText(Float.toString(Float.parseFloat(first)*Float.parseFloat(second))+"+");
+                        }
+                        else if (op=='/'){
+                            text.setText(Float.toString(Float.parseFloat(first)/Float.parseFloat(second))+"+");
+                        }
+                        else if (op=='^'){
+                            text.setText(Double.toString(Math.pow(Float.parseFloat(first),Float.parseFloat(second)))+"+");
+                        }
+
+
                     }
                 }
-                else if (text.getText().isEmpty() == false && text.getText().equals(".") == false){
-                    text.setText(text.getText()+"+");
+                else if (str.isEmpty() == false && str.equals(".") == false){
+                    text.setText(str+"+");
                 }
 
             }
@@ -202,13 +240,227 @@ class Main{
         // -
         buttons.get(2).addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if (text.getText().contains("+") || text.getText().contains("-") || text.getText().contains("*") || text.getText().contains("/") || text.getText().contains("^")){
-                    if (Arrays.asList('+','-','*','/','^').contains(text.getText().charAt(text.getText().length()-1))){
-                        text.setText(text.getText().substring(0,text.getText().length()-1)+"-");
+                String str = text.getText();
+                if (str.contains("+") || str.substring(1,str.length()).contains("-") || str.contains("*") || str.contains("/") || str.contains("^")){
+                    // Replace operation at end of string
+                    if (Arrays.asList('+','-','*','/','^').contains(str.charAt(str.length()-1))){
+                        text.setText(str.substring(0,str.length()-1)+"-");
+                    }
+                    else{
+                        int opLoc = -1;
+                        for (int i=0; i<str.length(); i++) {
+                            if (Arrays.asList('+','-','*','/','^').contains(str.charAt(i))){
+                                opLoc = i;
+                            }
+                        }
+                        String first = str.substring(0,opLoc);
+                        String second = str.substring(opLoc+1,str.length());
+                        char op = str.charAt(opLoc);
+                        if (second.equals(".")){
+                            
+                        }
+                        // Calculate operation and add minus sign to end of answer
+                        else if (op=='+'){
+                            text.setText(Float.toString(Float.parseFloat(first)+Float.parseFloat(second))+"-");
+                        }
+                        else if (op=='-'){
+                            text.setText(Float.toString(Float.parseFloat(first)-Float.parseFloat(second))+"-");
+                        }
+                        else if (op=='*'){
+                            text.setText(Float.toString(Float.parseFloat(first)*Float.parseFloat(second))+"-");
+                        }
+                        else if (op=='/'){
+                            text.setText(Float.toString(Float.parseFloat(first)/Float.parseFloat(second))+"-");
+                        }
+                        else if (op=='^'){
+                            text.setText(Double.toString(Math.pow(Float.parseFloat(first),Float.parseFloat(second)))+"-");
+                        }
+
+
                     }
                 }
-                else if (text.getText().isEmpty() == false && text.getText().equals(".") == false){
-                    text.setText(text.getText()+"-");
+                else if (str.isEmpty() == false && str.equals(".") == false){
+                    text.setText(str+"-");
+                }
+
+            }
+        });
+        // *
+        buttons.get(6).addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String str = text.getText();
+                if (str.contains("+") || str.substring(1,str.length()).contains("-") || str.contains("*") || str.contains("/") || str.contains("^")){
+                    // Replace operation at end of string
+                    if (Arrays.asList('+','-','*','/','^').contains(str.charAt(str.length()-1))){
+                        text.setText(str.substring(0,str.length()-1)+"*");
+                    }
+                    else{
+                        int opLoc = -1;
+                        for (int i=0; i<str.length(); i++) {
+                            if (Arrays.asList('+','-','*','/','^').contains(str.charAt(i))){
+                                opLoc = i;
+                            }
+                        }
+                        String first = str.substring(0,opLoc);
+                        String second = str.substring(opLoc+1,str.length());
+                        char op = str.charAt(opLoc);
+                        if (second.equals(".")){
+                            
+                        }
+                        // Calculate operation and add asterisk to end of answer
+                        else if (op=='+'){
+                            text.setText(Float.toString(Float.parseFloat(first)+Float.parseFloat(second))+"*");
+                        }
+                        else if (op=='-'){
+                            text.setText(Float.toString(Float.parseFloat(first)-Float.parseFloat(second))+"*");
+                        }
+                        else if (op=='*'){
+                            text.setText(Float.toString(Float.parseFloat(first)*Float.parseFloat(second))+"*");
+                        }
+                        else if (op=='/'){
+                            text.setText(Float.toString(Float.parseFloat(first)/Float.parseFloat(second))+"*");
+                        }
+                        else if (op=='^'){
+                            text.setText(Double.toString(Math.pow(Float.parseFloat(first),Float.parseFloat(second)))+"*");
+                        }
+
+
+                    }
+                }
+                else if (str.isEmpty() == false && str.equals(".") == false){
+                    text.setText(str+"*");
+                }
+
+            }
+        });
+        // / (Division)
+        buttons.get(10).addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String str = text.getText();
+                if (str.contains("+") || str.substring(1,str.length()).contains("-") || str.contains("*") || str.contains("/") || str.contains("^")){
+                    // Replace operation at end of string
+                    if (Arrays.asList('+','-','*','/','^').contains(str.charAt(str.length()-1))){
+                        text.setText(str.substring(0,str.length()-1)+"/");
+                    }
+                    else{
+                        int opLoc = -1;
+                        for (int i=0; i<str.length(); i++) {
+                            if (Arrays.asList('+','-','*','/','^').contains(str.charAt(i))){
+                                opLoc = i;
+                            }
+                        }
+                        String first = str.substring(0,opLoc);
+                        String second = str.substring(opLoc+1,str.length());
+                        char op = str.charAt(opLoc);
+                        if (second.equals(".")){
+                            
+                        }
+                        // Calculate operation and add slash at end of answer
+                        else if (op=='+'){
+                            text.setText(Float.toString(Float.parseFloat(first)+Float.parseFloat(second))+"/");
+                        }
+                        else if (op=='-'){
+                            text.setText(Float.toString(Float.parseFloat(first)-Float.parseFloat(second))+"/");
+                        }
+                        else if (op=='*'){
+                            text.setText(Float.toString(Float.parseFloat(first)*Float.parseFloat(second))+"/");
+                        }
+                        else if (op=='/'){
+                            text.setText(Float.toString(Float.parseFloat(first)/Float.parseFloat(second))+"/");
+                        }
+                        else if (op=='^'){
+                            text.setText(Double.toString(Math.pow(Float.parseFloat(first),Float.parseFloat(second)))+"/");
+                        }
+
+
+                    }
+                }
+                else if (str.isEmpty() == false && str.equals(".") == false){
+                    text.setText(str+"/");
+                }
+
+            }
+        });
+        // ^ (Exponent)
+        buttons.get(14).addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String str = text.getText();
+                if (str.contains("+") || str.substring(1,str.length()).contains("-") || str.contains("*") || str.contains("/") || str.contains("^")){
+                    // Replace operation at end of string
+                    if (Arrays.asList('+','-','*','/','^').contains(str.charAt(str.length()-1))){
+                        text.setText(str.substring(0,str.length()-1)+"^");
+                    }
+                    else{
+                        int opLoc = -1;
+                        for (int i=0; i<str.length(); i++) {
+                            if (Arrays.asList('+','-','*','/','^').contains(str.charAt(i))){
+                                opLoc = i;
+                            }
+                        }
+                        String first = str.substring(0,opLoc);
+                        String second = str.substring(opLoc+1,str.length());
+                        char op = str.charAt(opLoc);
+                        if (second.equals(".")){
+                            
+                        }
+                        // Calculate operation and add exponent sign to end of answer
+                        else if (op=='+'){
+                            text.setText(Float.toString(Float.parseFloat(first)+Float.parseFloat(second))+"^");
+                        }
+                        else if (op=='-'){
+                            text.setText(Float.toString(Float.parseFloat(first)-Float.parseFloat(second))+"^");
+                        }
+                        else if (op=='*'){
+                            text.setText(Float.toString(Float.parseFloat(first)*Float.parseFloat(second))+"^");
+                        }
+                        else if (op=='/'){
+                            text.setText(Float.toString(Float.parseFloat(first)/Float.parseFloat(second))+"^");
+                        }
+                        else if (op=='^'){
+                            text.setText(Double.toString(Math.pow(Float.parseFloat(first),Float.parseFloat(second)))+"^");
+                        }
+
+
+                    }
+                }
+                else if (str.isEmpty() == false && str.equals(".") == false){
+                    text.setText(str+"^");
+                }
+
+            }
+        });
+        // =
+        buttons.get(17).addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String str = text.getText();
+                int opLoc = -1;
+                for (int i=0; i<str.length(); i++) {
+                    if (Arrays.asList('+','-','*','/','^').contains(str.charAt(i))){
+                        opLoc = i;
+                    }
+                }
+                if (opLoc!=-1){
+                    String first = str.substring(0,opLoc);
+                    String second = str.substring(opLoc+1,str.length());
+                    char op = str.charAt(opLoc);
+                    if (second.equals(".") || second.isEmpty()){
+                                
+                    }
+                    else if (op=='+'){
+                        text.setText(Float.toString(Float.parseFloat(first)+Float.parseFloat(second)));
+                    }
+                    else if (op=='-'){
+                        text.setText(Float.toString(Float.parseFloat(first)-Float.parseFloat(second)));
+                    }
+                    else if (op=='*'){
+                        text.setText(Float.toString(Float.parseFloat(first)*Float.parseFloat(second)));
+                    }
+                    else if (op=='/'){
+                        text.setText(Float.toString(Float.parseFloat(first)/Float.parseFloat(second)));
+                    }
+                    else if (op=='^'){
+                        text.setText(Double.toString(Math.pow(Float.parseFloat(first),Float.parseFloat(second))));
+                    }
                 }
 
             }
